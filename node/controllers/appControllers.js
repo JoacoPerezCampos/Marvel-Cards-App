@@ -1,50 +1,116 @@
-import appModel from '../models/appModel.js';
+import {appModel} from '../models/appModel.js';
+import axios from "axios";
+
 
 //CRUD Methods
+//Show characters
+export const getAllCharacters = async (req, res) => {
+    try {
+        const response = await axios.get('http://gateway.marvel.com/v1/public/characters', {
+            params: {
+                apikey: 'c0072e6deb6cab617e37ac5f3a525c68',
+                ts: "1",
+                hash: "066c111cf28616b5e0ea6ec82e8b13b7"
+            }
+        });
+        const characters = response.data.data.results;
+        res.json(characters);
+    } catch (error) {
+        console.error('Error al obtener datos de la API de Marvel', error);
+        res.status(500).json({ message: 'Error al obtener datos de la API de Marvel' });
+    }
+};
 
-//Show registers
-export const getAllRegisters = async (req, res) => {
+//Show a character
+export const getACharacterById = async (req, res) => {
+    const { id } = req.params;
     try {
-        const registers = await appModel.findAll()
-        res.json(register)
+        const response = await axios.get(`http://gateway.marvel.com/v1/public/characters/${id}`, {
+            params: {
+                apikey: 'c0072e6deb6cab617e37ac5f3a525c68',
+                ts: "1",
+                hash: "066c111cf28616b5e0ea6ec82e8b13b7"
+            }
+        });
+        const character = response.data.data.results[0];
+        res.json(character);
     } catch (error) {
-        res.json( { message : error.message})
+        console.error('Error al obtener datos del personaje desde la API de Marvel', error);
+        res.status(500).json({ message: 'Error al obtener datos del personaje desde la API de Marvel' });
+    }
+};
+
+//Show a list of characters that has certain string in his name
+export const searchCharactersByName = async (req, res) => {
+    const { name } = req.params;
+    console.log(name);
+    try {
+        const response = await axios.get('http://gateway.marvel.com/v1/public/characters', {
+            params: {
+                apikey: 'c0072e6deb6cab617e37ac5f3a525c68',
+                ts: "1",
+                hash: "066c111cf28616b5e0ea6ec82e8b13b7",
+                nameStartsWith: name
+            }
+        });
+        const characters = response.data.data.results;
+        const filteredCharacters = characters.filter(character =>
+            character.name.toLowerCase().includes(name.toLowerCase())
+        );
+        res.json(filteredCharacters);
+    } catch (error) {
+        console.error('Error al obtener datos de la API de Marvel', error);
+        res.status(500).json({ error: 'Error al obtener datos de la API de Marvel' });
     }
 }
 
-//Show a register
-export const getRegister = async (req, res) =>{
+//Save a Favorite character
+export const saveFavoriteCharacter = async (req, res) => {
+    const { charName, charDescrip, charImg, charUrls } = req.body;
     try {
-        const register = appModel.findAll({
-            where:{ id:req.params.id}
-        })
-        res.json(register)
+        const newFavorite = await appModel.create({
+            charName,
+            charDescrip,
+            charImg,
+            charUrls,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        });
+        res.status(201).json({ message: 'Agregado a Favoritos', newFavorite});
     } catch (error) {
-        res.json( { message : error.message}) 
+        console.error('Error al guardar al personaje como favorito', error);
+        res.status(500).json({ error: 'Error al guardar al personaje como favorito' });
     }
 }
 
-//Create a register
-export const createRegister = async (req, res) =>{
+// Delete a favorite character by ID
+export const deleteFavoriteCharacterById = async (req, res) => {
+    const { id } = req.params;
     try {
-       await appModel.create(req.body)
-       res.json({
-        "message":"Añadido a Favoritos"
-       })
+        const deletedFavorite = await appModel.destroy({
+            where: {
+                id: id
+            }
+        });
+        if (deletedFavorite === 0) {
+            return res.status(404).json({ message: 'No se encontró el personaje con el ID proporcionado' });
+        }
+        res.status(200).json({ message: 'Personaje eliminado de Favoritos' });
     } catch (error) {
-        res.json( { message : error.message}) 
+        console.error('Error al eliminar el personaje de Favoritos', error);
+        res.status(500).json({ error: 'Error al eliminar el personaje de Favoritos' });
     }
 }
-//Delete a register
-export const deleteRegister = async (req, res) =>{
+
+// Get all favorite characters
+export const getFavoriteCharacters = async (req, res) => {
     try {
-        await appModel.destroy({
-            where: { id: req.params.id }
-        })
-        res.json({
-            "message":"Eliminado de Favoritos"
-        })
+        const favorites = await appModel.findAll();
+        console.log(favorites);
+        res.json(favorites);
     } catch (error) {
-        res.json( { message : error.message}) 
+        console.error('Error al obtener los favoritos', error);
+        res.status(500).json({ error: 'Error al obtener los favoritos' });
     }
 }
+

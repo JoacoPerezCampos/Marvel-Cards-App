@@ -1,8 +1,9 @@
-import {Sequelize} from 'sequelize'
+import {Sequelize} from "sequelize";
 
-const db = new Sequelize('marveldatabase.app', 'root', '',{
+const db = new Sequelize('marveldatabase.app', 'root','root',{
     host : 'localhost',
-    dialect: 'mysql'
+    dialect: 'mysql',
+    port: '3307'
 })
 
-export default db
+export default db;

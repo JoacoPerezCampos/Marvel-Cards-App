@@ -7,7 +7,7 @@ const app = express();
 
 app.use( cors());
 app.use(express.json());
-app.use("/app", appRoutes)
+app.use("/marvels", appRoutes)
 
 try {
     await db.authenticate()
