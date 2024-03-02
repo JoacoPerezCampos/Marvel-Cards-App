@@ -32,8 +32,8 @@ const Sidebar = ({ onCharacterClick }) => {
               {favoriteCharacters.map((character) => (
                 <li key={character.id}>
                   <img src={character.thumbnail} alt={character.name} />
-                  <button onClick={() => handleRemoveFavorite(character.id)}>Eliminar</button>
                   <span onClick={() => handleCharacterClick(character)}>{character.name}</span>
+                  <button onClick={() => handleRemoveFavorite(character.id)}>Eliminar</button>
                 </li>
               ))}
             </ul>

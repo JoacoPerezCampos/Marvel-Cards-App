@@ -2,16 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 .App-header {
   background-color: rgba(0, 0, 0, 0.6);
   height: 400px;
@@ -21,27 +11,28 @@
   align-items: center;
   justify-content: center;
   font-size: calc(30px + 5vmin);
-  font-family: Helvetica;
-  color: rgb(43, 1, 1);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: rgb(0, 0, 0);
 }
 
 .App-link {
   color: #61dafb;
 }
 
-#cardlist{
-  background-image: url(https://st4.depositphotos.com/3848923/38046/i/450/depositphotos_380465564-stock-photo-red-color-abstract-background.jpg) ;
+#cardDiv {
+  display: flex;
+  flex-wrap: wrap;
+}
+#formDiv{
+  margin-left: 15px;
+  margin-right: 15px;
+  
 }
 
-#cards{
-  max-height: 300px;
+#logo {
+  height: 250px;
+  width: auto;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: rgba(0, 0, 0, 0);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

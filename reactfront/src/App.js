@@ -3,7 +3,6 @@ import axios from 'axios';
 import Header from '../src/components/header/header.js';
 import CardList from '../src/components/cardsList/cardsList.js';
 import Sidebar from '../src/components/sidebar/sidebar.js';
-import CardDetails from '../src/components/cardDetails/cardDetails.js';
 import Footer from './components/footer/footer.js';
 
 const URI = 'http://localhost:8000/marvels';
@@ -50,7 +49,7 @@ const App = () => {
       <div className="main">
         <CardList characters={searchedCharacters.length > 0 ? searchedCharacters : characters} onCharacterClick={handleCharacterClick} />
         <Sidebar favorites={favorites} onCharacterClick={handleCharacterClick} />
-        {selectedCharacter && <CardDetails character={selectedCharacter} />}
+        {selectedCharacter}
       </div>
       <div>
         <Footer></Footer>

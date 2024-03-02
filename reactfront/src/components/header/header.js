@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+
 const URI = "http://localhost:8000/marvels";
 
 const Header = ({ setSearchedCharacters }) => {
@@ -23,24 +24,21 @@ const Header = ({ setSearchedCharacters }) => {
 
     return (
         <header>
-            <div className="p-5 text-center bg-image">
-                <div>
-                    <div className="d-flex justify-content-center align-items-center h-100">
-                        <div>
-                            <h1 className="mb-4">Marvel Cards App</h1>
-                            <form className="d-flex form-control rounded" onSubmit={handleSubmit} >
-                                <div className="input-group rounded">
-                                    <input type="search" value={searchTerm} onChange={handleSearchChange} className="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                                    <span className="input-group-text border-0" id="search-addon">
-                                        <button type="submit">
-                                            <i className="fas fa-search"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+            <div className="p-5 text-center" id='logoDiv'>
+                <img className="image-fluid img-thumbnail" id="logo" src='https://images.squarespace-cdn.com/content/v1/57d1dee3e4fcb5df271a0683/1478382802337-PDO7TN3O88E7N4SB87ZQ/marvel.png' alt=''></img>
+            </div>
+            <div className="d-flex justify-content-center align-items-center h-100">
+                <h1 className="mb-4">Marvel Cards App</h1>
+            </div>
+            <div id='formDiv' className="d-flex input-group rounded">
+                <form className="d-flex form-control rounded" onSubmit={handleSubmit}>
+                    <input type="search" value={searchTerm} onChange={handleSearchChange} className="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                    <span className="input-group-text border-0" id="search-addon">
+                        <button type="submit">
+                            <i className="fas fa-search"></i>
+                        </button>
+                    </span>
+                </form>
             </div>
         </header >
     )

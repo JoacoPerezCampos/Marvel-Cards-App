@@ -1,4 +1,6 @@
+import React from 'react';
 import Card from '../card/card.js';
+
 
 const CardList = ({ characters }) => {
 
@@ -8,8 +10,10 @@ const CardList = ({ characters }) => {
         {characters.map((character) => (
           <div id='cards' key={character.id} className="col-lg-3 col-md-4 col-sm-6 p-1">
             <Card
+              charId={character.charId}
               thumbnail={character.thumbnail}
               name={character.name}
+              description={character.description}
             />
           </div>
         ))}

@@ -66,9 +66,10 @@ export const searchCharactersByName = async (req, res) => {
 
 //Save a Favorite character
 export const saveFavoriteCharacter = async (req, res) => {
-    const { charName, charDescrip, charImg, charUrls } = req.body;
+    const { charId, charName, charDescrip, charImg, charUrls } = req.body;
     try {
         const newFavorite = await appModel.create({
+            charId,
             charName,
             charDescrip,
             charImg,
@@ -85,11 +86,11 @@ export const saveFavoriteCharacter = async (req, res) => {
 
 // Delete a favorite character by ID
 export const deleteFavoriteCharacterById = async (req, res) => {
-    const { id } = req.params;
+    const { charId } = req.params;
     try {
         const deletedFavorite = await appModel.destroy({
             where: {
-                id: id
+                charId: charId
             }
         });
         if (deletedFavorite === 0) {
