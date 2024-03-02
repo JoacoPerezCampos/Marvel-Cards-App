@@ -24,7 +24,7 @@ const Header = ({ setSearchedCharacters }) => {
 
     return (
         <header>
-            <div className="p-5 text-center" id='logoDiv'>
+            <div className="p-1 text-center" id='logoDiv'>
                 <img className="image-fluid img-thumbnail" id="logo" src='https://images.squarespace-cdn.com/content/v1/57d1dee3e4fcb5df271a0683/1478382802337-PDO7TN3O88E7N4SB87ZQ/marvel.png' alt=''></img>
             </div>
             <div className="d-flex justify-content-center align-items-center h-100">

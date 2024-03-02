@@ -1,9 +1,7 @@
-import {appModel} from '../models/appModel.js';
+import { appModel } from '../models/appModel.js';
 import axios from "axios";
 
-
-//CRUD Methods
-//Show characters
+// Método para obtener todos los personajes
 export const getAllCharacters = async (req, res) => {
     try {
         const response = await axios.get('http://gateway.marvel.com/v1/public/characters', {
@@ -21,7 +19,7 @@ export const getAllCharacters = async (req, res) => {
     }
 };
 
-//Show a character
+// Método para obtener un personaje por su ID
 export const getACharacterById = async (req, res) => {
     const { id } = req.params;
     try {
@@ -40,7 +38,7 @@ export const getACharacterById = async (req, res) => {
     }
 };
 
-//Show a list of characters that has certain string in his name
+// Método para buscar personajes por su nombre
 export const searchCharactersByName = async (req, res) => {
     const { name } = req.params;
     console.log(name);
@@ -64,12 +62,25 @@ export const searchCharactersByName = async (req, res) => {
     }
 }
 
-//Save a Favorite character
+// Método para guardar un personaje como favorito
 export const saveFavoriteCharacter = async (req, res) => {
     const { charId, charName, charDescrip, charImg, charUrls } = req.body;
+
     try {
+        // Obtener la ID del personaje de Marvel y asignarla a charId
+        const { data } = await axios.get(`http://gateway.marvel.com/v1/public/characters/${charId}`, {
+            params: {
+                apikey: 'e11c96dbc59dbee675424933880fba29',
+                ts: "1",
+                hash: "bf82831084ac8e9ef97c5b86454e2926"
+            }
+        });
+
+        const marvelCharId = data.data.results[0].id;
+
+        // Guardar el personaje como favorito en la base de datos
         const newFavorite = await appModel.create({
-            charId,
+            charId: marvelCharId, // Asignar la ID de Marvel a charId
             charName,
             charDescrip,
             charImg,
@@ -84,7 +95,7 @@ export const saveFavoriteCharacter = async (req, res) => {
     }
 }
 
-// Delete a favorite character by ID
+// Método para eliminar un personaje favorito por su ID
 export const deleteFavoriteCharacterById = async (req, res) => {
     const { charId } = req.params;
     try {
@@ -103,7 +114,7 @@ export const deleteFavoriteCharacterById = async (req, res) => {
     }
 }
 
-// Get all favorite characters
+// Método para obtener todos los personajes favoritos
 export const getFavoriteCharacters = async (req, res) => {
     try {
         const favorites = await appModel.findAll();
@@ -114,4 +125,3 @@ export const getFavoriteCharacters = async (req, res) => {
         res.status(500).json({ error: 'Error al obtener los favoritos' });
     }
 }
-

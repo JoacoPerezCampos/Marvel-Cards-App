@@ -10,9 +10,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(30px + 5vmin);
+  font-size: calc(60px + 10vmin);
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: rgb(0, 0, 0);
+  color: navajowhite;
 }
 
 .App-link {
@@ -23,10 +23,10 @@
   display: flex;
   flex-wrap: wrap;
 }
-#formDiv{
-  margin-left: 15px;
+
+#formDiv {
+  margin-left: 10px;
   margin-right: 15px;
-  
 }
 
 #logo {
@@ -36,3 +36,35 @@
   border-color: rgba(0, 0, 0, 0);
 }
 
+.sidebar {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 5px; /* Agrega bordes redondeados al sidebar */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Agrega una sombra suave al sidebar */
+}
+
+.sidebar-content {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.sidebar .card {
+  border: none;
+  box-shadow: none; /* Elimina la sombra del card en el sidebar */
+}
+
+.sidebar .list-group-item {
+  cursor: pointer;
+  border: none; /* Elimina el borde de los elementos de la lista */
+}
+
+.sidebar .list-group-item:hover {
+  background-color: #e9ecef;
+}
+
+.sidebar .list-group-item img {
+  margin-right: 10px;
+  border-radius: 50%; /* Aplica bordes redondeados a las imágenes */
+  width: 50px; /* Ajusta el tamaño de las imágenes */
+  height: 50px;
+}
