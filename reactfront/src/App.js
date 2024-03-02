@@ -12,7 +12,7 @@ const URI = 'http://localhost:8000/marvels';
 const App = () => {
   const [characters, setCharacters] = useState([]);
   const [favorites, setFavorites] = useState([]);
-  const [selectedCharacter, setSelectedCharacter] = useState(null);
+  const [selectedCharacter, setSelectedCharacter] = useState([]);
   const [searchedCharacters, setSearchedCharacters] = useState([]);
   
   useEffect(() => {

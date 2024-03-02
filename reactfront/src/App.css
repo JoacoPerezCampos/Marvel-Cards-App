@@ -33,6 +33,10 @@
   background-image: url(https://st4.depositphotos.com/3848923/38046/i/450/depositphotos_380465564-stock-photo-red-color-abstract-background.jpg) ;
 }
 
+#cards{
+  max-height: 300px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
