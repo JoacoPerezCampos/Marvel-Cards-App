@@ -8,9 +8,9 @@ export const getAllCharacters = async (req, res) => {
     try {
         const response = await axios.get('http://gateway.marvel.com/v1/public/characters', {
             params: {
-                apikey: 'c0072e6deb6cab617e37ac5f3a525c68',
+                apikey: 'e11c96dbc59dbee675424933880fba29',
                 ts: "1",
-                hash: "066c111cf28616b5e0ea6ec82e8b13b7"
+                hash: "bf82831084ac8e9ef97c5b86454e2926"
             }
         });
         const characters = response.data.data.results;
@@ -27,9 +27,9 @@ export const getACharacterById = async (req, res) => {
     try {
         const response = await axios.get(`http://gateway.marvel.com/v1/public/characters/${id}`, {
             params: {
-                apikey: 'c0072e6deb6cab617e37ac5f3a525c68',
+                apikey: 'e11c96dbc59dbee675424933880fba29',
                 ts: "1",
-                hash: "066c111cf28616b5e0ea6ec82e8b13b7"
+                hash: "bf82831084ac8e9ef97c5b86454e2926"
             }
         });
         const character = response.data.data.results[0];
@@ -47,9 +47,9 @@ export const searchCharactersByName = async (req, res) => {
     try {
         const response = await axios.get('http://gateway.marvel.com/v1/public/characters', {
             params: {
-                apikey: 'c0072e6deb6cab617e37ac5f3a525c68',
+                apikey: 'e11c96dbc59dbee675424933880fba29',
                 ts: "1",
-                hash: "066c111cf28616b5e0ea6ec82e8b13b7",
+                hash: "bf82831084ac8e9ef97c5b86454e2926",
                 nameStartsWith: name
             }
         });
